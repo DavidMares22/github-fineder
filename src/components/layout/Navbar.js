@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
 
 
-class Navbar extends Component {
-    render() {
+ const Navbar = (props) => {
+    
         return (
             <nav className='navbar bg-primary'>
                 <h1>
-                <FontAwesomeIcon icon={faGithub}/> {this.props.title}
+                <FontAwesomeIcon icon={faGithub}/> {props.title}
                 </h1>
             </nav>
         );
-    }
+    
 }
 
 export default Navbar;
