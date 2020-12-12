@@ -1,20 +1,21 @@
- import React, { Fragment,Component } from 'react';
+ import React, { Fragment,useEffect } from 'react';
  import Spinner from '../layout/Spinner';
  import {Link} from 'react-router-dom';
  import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
  import { faCheck,faTimesCircle } from '@fortawesome/free-solid-svg-icons';
  import Repos from '../repos/Repos';
  
- class User extends Component {
-     componentDidMount(){
-         this.props.getUser(this.props.match.params.login) 
-         this.props.getUserRepos(this.props.match.params.login)
+ const User = (props) => {
 
-     }
+    useEffect(()=>{
+      props.getUser(props.match.params.login)
+      props.getUserRepos(props.match.params.login)
+    },[])
+   
 
-     render() {
-         const {name,avatar_url,location,bio,blog,login,company,html_url,followers,following,public_repos,public_gists,hireable } = this.props.user;
-         if (this.props.loading) return <Spinner />;
+     
+         const {name,avatar_url,location,bio,blog,login,company,html_url,followers,following,public_repos,public_gists,hireable } = props.user;
+         if (props.loading) return <Spinner />;
 
          return (<Fragment>
              <Link to='/' className='btn btn-light'>
@@ -77,10 +78,10 @@
           <div className='badge badge-dark'>Public Gists: {public_gists}</div>
         </div>
 
-        <Repos repos={this.props.repos}/> 
+        <Repos repos={props.repos}/> 
          </Fragment>
          );
-     }
+     
  }
  
  export default User;
