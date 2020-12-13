@@ -1,21 +1,24 @@
- import React, { Fragment,useEffect } from 'react';
+ import React, { Fragment,useEffect,useContext } from 'react';
  import Spinner from '../layout/Spinner';
  import {Link} from 'react-router-dom';
  import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
  import { faCheck,faTimesCircle } from '@fortawesome/free-solid-svg-icons';
  import Repos from '../repos/Repos';
+
+ import GithubContext from '../../context/github/githubContext';
  
  const User = (props) => {
+    const githubContext = useContext(GithubContext);
 
     useEffect(()=>{
-      props.getUser(props.match.params.login)
+      githubContext.getUser(props.match.params.login)
       props.getUserRepos(props.match.params.login)
     },[])
    
 
      
-         const {name,avatar_url,location,bio,blog,login,company,html_url,followers,following,public_repos,public_gists,hireable } = props.user;
-         if (props.loading) return <Spinner />;
+         const {name,avatar_url,location,bio,blog,login,company,html_url,followers,following,public_repos,public_gists,hireable } = githubContext.user;
+         if (githubContext.loading) return <Spinner />;
 
          return (<Fragment>
              <Link to='/' className='btn btn-light'>

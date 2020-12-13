@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import GithubContext from '../../context/github/githubContext';
 
 const Search  = (props) => {
+    const githubContext = useContext(GithubContext);
     const [text,setText] = useState('');
 
     const onChange = (e) =>{
@@ -11,7 +13,7 @@ const Search  = (props) => {
         if(text === ''){
             props.setAlert('Please enter something','light')
         }else{
-            props.searchUsers(text);
+            githubContext.searchUsers(text);
             setText('')
         }
     }
@@ -23,7 +25,7 @@ const Search  = (props) => {
                     <input type="text" name="text" placeholder="Search Users..." value={text} onChange={onChange} />
                     <input type="submit" value="Seach" className="btn btn-dark btn-block" />
                 </form>
-                {props.showClear && <button className="btn btn-light btn-block" onClick={props.clearUsers}>Clear</button>}
+                {githubContext.users.length>0 && <button className="btn btn-light btn-block" onClick={githubContext.clearUsers}>Clear</button>}
                 
             </div>
         );
