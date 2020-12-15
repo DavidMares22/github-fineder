@@ -1,12 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+import AlertContext from '../../context/alert/alertContext'
 
-const Alert = ({alert}) => {
+
+const Alert = () => {
+    const alertContext = useContext(AlertContext);
     return (
-        alert !== null && (
-            <div className={`alert alert-${alert.type}`}>
-                <FontAwesomeIcon icon={faInfoCircle}/> {alert.msg}
+        alertContext.alert !== null && (
+            <div className={`alert alert-${alertContext.alert.type}`}>
+                <FontAwesomeIcon icon={faInfoCircle}/> {alertContext.alert.msg}
             </div>
         )
     )

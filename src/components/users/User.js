@@ -12,7 +12,7 @@
 
     useEffect(()=>{
       githubContext.getUser(props.match.params.login)
-      props.getUserRepos(props.match.params.login)
+      githubContext.getUserRepos(props.match.params.login)
     },[])
    
 
@@ -81,7 +81,7 @@
           <div className='badge badge-dark'>Public Gists: {public_gists}</div>
         </div>
 
-        <Repos repos={props.repos}/> 
+        <Repos repos={githubContext.repos}/> 
          </Fragment>
          );
      
